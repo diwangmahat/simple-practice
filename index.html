@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffb6c1; /* Baby Pink background */
+            overflow: hidden;
+        }
+
+        #proposal-container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 24px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            color: #602749; /* Dark Pink text color */
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #ff69b4; /* Hot Pink button color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #no-button {
+            transition: margin-left 0.5s;
+        }
+
+        #result-container {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #ff69b4; /* Hot Pink text color */
+        }
+
+        #heart {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: #ff0000; /* Red heart color */
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff0000; /* Red sparkle color */
+            opacity: 0;
+            animation: sparkleAnimation linear infinite;
+        }
+
+        @keyframes sparkleAnimation {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(200px) rotate(360deg);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Styling */
+        @media only screen and (max-width: 600px) {
+            h2 {
+                font-size: 18px;
+            }
+
+            button {
+                font-size: 16px;
+            }
+        }
+    </style>
+    <title>Valentine's Day Proposal</title>
+</head>
+<body>
+
+<div id="proposal-container">
+    <h2>You deserve the world and all the good things it has to offer. If I fail to find that world for you, I promise to give you mine!<br> Will you be mine forever?</h2>
+    <button id="yes-button" onclick="handleYesClick()">Yes</button>
+    <button id="no-button" onclick="handleNoClick()">No</button>
+    <div id="result-container"></div>
+</div>
+
+<div id="heart">&#10084;</div>
+
+<script>
+    let noButtonClickCount = 0;
+
+    function handleYesClick() {
+        const longMessage = "My dearest love, words can hardly capture the overflowing happiness in my heart right now. Saying 'Yes' to being my Valentine means the world to me. You are the source of my joy, the light in my life, and the one I want to share every beautiful moment with. I feel incredibly fortunate to have you by my side. As we embark on this journey together, know that my love for you is boundless and everlasting. Thank you for making me the happiest person in the world. I cherish you always.";
+        document.getElementById('result-container').innerHTML = longMessage;
+    }
+
+    function handleNoClick() {
+        noButtonClickCount++;
+
+        // Move the "No" button until "Yes" is selected
+        const noButton = document.getElementById('no-button');
+        const yesButton = document.getElementById('yes-button');
+
+        noButton.style.marginLeft = `${noButtonClickCount * 20}px`; // Adjust the value as needed
+
+        // Change the text of the "Yes" button with each "No" click
+        const yesWords = ["Please", "Pleassse", "Pleeeeaassee", "I love you", "Be mine Valentine"];
+        const randomYesWord = yesWords[Math.floor(Math.random() * yesWords.length)];
+        yesButton.innerText = randomYesWord;
+
+        document.getElementById('result-container').innerHTML = `No, not yet...`;
+
+        // Add a sparkle effect
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = `${Math.random() * window.innerWidth}px`;
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => {
+            sparkle.remove();
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>
